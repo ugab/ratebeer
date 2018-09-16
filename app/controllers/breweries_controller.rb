@@ -1,6 +1,7 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate, only: [:destroy]
+  
   # GET /breweries
   # GET /breweries.json
   def index
@@ -71,4 +72,24 @@ class BreweriesController < ApplicationController
     def brewery_params
       params.require(:brewery).permit(:name, :year)
     end
-end
+
+    def authenticate
+      authenticate_or_request_with_http_basic do |username, password| 
+
+        ss = { username => password }
+        ad = { "pekka" => "beer", "arto" => "foobar", "matti" => "ittam", "vilma" => "kangas" }
+
+        login_ok = false
+
+        
+          if ss[username] == ad[username]
+            login_ok = true
+          end
+        
+
+  
+        # koodilohkon arvo on sen viimeisen komennon arvo eli true/false riippuen kirjautumisen onnistumisesta
+        login_ok  
+      end
+    end
+  end

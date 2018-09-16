@@ -1,0 +1,5 @@
+Brewery
+Brewery.create(name: "BrewDog", year: "2007")
+Beer
+Beer.create name: 'punk ipa', style: 'ipa' brewery_id: '5'
+Beer.create name: 'nanny state', style: 'lowalcohol' brewery_id: '5'
